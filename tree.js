@@ -25,7 +25,7 @@ export class Tree {
     const arrCopy = [];
 
     for (let i = 0; i < array.length; i++) {
-      if (array[i] !== array[i + 1]) {
+      if (i === 0 || array[i] !== array[i - 1]) {
         arrCopy.push(array[i]);
       }
     }
