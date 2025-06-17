@@ -90,19 +90,32 @@ export class Tree {
       return;
     }
 
+    // No children
     if (!currNode.right && !currNode.left) {
-      if (parent.data > value) {
+      if (!parent) {
+        this.root = null;
+      } else if (parent.data > value) {
         parent.left = null;
       } else {
         parent.right = null;
       }
-    } else if (!currNode.right || !currNode.left) {
-      if (parent.data > value) {
-        parent.left = currNode.left;
+    }
+
+    // One child
+    else if (!currNode.right || !currNode.left) {
+      const child = currNode.left ? currNode.left : currNode.right;
+
+      if (!parent) {
+        this.root = child;
+      } else if (parent.data > value) {
+        parent.left = child;
       } else {
-        parent.right = currNode.right;
+        parent.right = child;
       }
-    } else {
+    }
+
+    // Two children
+    else {
       let temp = currNode.right;
       let p = null;
 
