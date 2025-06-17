@@ -133,6 +133,22 @@ export class Tree {
       currNode.data = temp.data;
     }
   }
+
+  find(value) {
+    let currNode = this.root;
+
+    while (currNode !== null) {
+      if (value === currNode.data) {
+        return currNode;
+      } else if (value > currNode.data) {
+        currNode = currNode.right;
+      } else {
+        currNode = currNode.left;
+      }
+    }
+
+    return false;
+  }
 }
 
 export const prettyPrint = (node, prefix = "", isLeft = true) => {
