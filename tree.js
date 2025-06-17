@@ -325,6 +325,16 @@ export class Tree {
     });
     return balanced;
   }
+
+  rebalance() {
+    const orderedArray = [];
+
+    this.inOrder((node) => {
+      orderedArray.push(node.data);
+    });
+
+    this.root = this.buildTree(orderedArray);
+  }
 }
 
 export const prettyPrint = (node, prefix = "", isLeft = true) => {
