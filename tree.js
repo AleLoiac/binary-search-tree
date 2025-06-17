@@ -281,6 +281,24 @@ export class Tree {
 
     return recurse(startingNode);
   }
+
+  depth(value) {
+    let depth = 1;
+    let currNode = this.root;
+
+    while (currNode !== null) {
+      if (value === currNode.data) {
+        return depth;
+      } else if (value > currNode.data) {
+        depth++;
+        currNode = currNode.right;
+      } else {
+        depth++;
+        currNode = currNode.left;
+      }
+    }
+    return null;
+  }
 }
 
 export const prettyPrint = (node, prefix = "", isLeft = true) => {
