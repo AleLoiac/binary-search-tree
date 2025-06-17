@@ -149,6 +149,31 @@ export class Tree {
 
     return false;
   }
+
+  levelOrder(callback) {
+    if (typeof callback !== "function") {
+      throw new Error("Parameter is not a function!");
+    }
+
+    if (!this.root) {
+      return;
+    }
+
+    const queue = [];
+
+    queue.push(this.root);
+
+    while (queue.length > 0) {
+      callback(queue[0]);
+      if (queue[0].left !== null) {
+        queue.push(queue[0].left);
+      }
+      if (queue[0].right !== null) {
+        queue.push(queue[0].right);
+      }
+      queue.shift();
+    }
+  }
 }
 
 export const prettyPrint = (node, prefix = "", isLeft = true) => {
