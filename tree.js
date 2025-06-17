@@ -264,7 +264,7 @@ export class Tree {
     recurse(this.root);
   }
 
-  heigth(value) {
+  height(value) {
     const startingNode = this.find(value);
 
     if (!startingNode) {
@@ -304,22 +304,22 @@ export class Tree {
     let balanced = true;
 
     this.preOrder((node) => {
-      let leftHeigth;
-      let rightHeigth;
+      let leftHeight;
+      let rightHeight;
 
       if (node.left === null) {
-        leftHeigth = 0;
+        leftHeight = 0;
       } else {
-        leftHeigth = this.heigth(node.left.data);
+        leftHeight = this.height(node.left.data);
       }
 
       if (node.right === null) {
-        rightHeigth = 0;
+        rightHeight = 0;
       } else {
-        rightHeigth = this.heigth(node.right.data);
+        rightHeight = this.height(node.right.data);
       }
 
-      if (Math.abs(leftHeigth - rightHeigth) > 1) {
+      if (Math.abs(leftHeight - rightHeight) > 1) {
         balanced = false;
       }
     });
