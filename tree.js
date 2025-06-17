@@ -223,6 +223,46 @@ export class Tree {
     }
     recurse(this.root);
   }
+
+  inOrder(callback) {
+    if (typeof callback !== "function") {
+      throw new Error("Parameter is not a function!");
+    }
+
+    function recurse(root) {
+      if (root === null) {
+        return;
+      }
+      if (root.left !== null) {
+        recurse(root.left);
+      }
+      callback(root);
+      if (root.right !== null) {
+        recurse(root.right);
+      }
+    }
+    recurse(this.root);
+  }
+
+  postOrder(callback) {
+    if (typeof callback !== "function") {
+      throw new Error("Parameter is not a function!");
+    }
+
+    function recurse(root) {
+      if (root === null) {
+        return;
+      }
+      if (root.left !== null) {
+        recurse(root.left);
+      }
+      if (root.right !== null) {
+        recurse(root.right);
+      }
+      callback(root);
+    }
+    recurse(this.root);
+  }
 }
 
 export const prettyPrint = (node, prefix = "", isLeft = true) => {
