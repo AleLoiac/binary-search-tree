@@ -299,6 +299,32 @@ export class Tree {
     }
     return null;
   }
+
+  isBalanced() {
+    let balanced = true;
+
+    this.preOrder((node) => {
+      let leftHeigth;
+      let rightHeigth;
+
+      if (node.left === null) {
+        leftHeigth = 0;
+      } else {
+        leftHeigth = this.heigth(node.left.data);
+      }
+
+      if (node.right === null) {
+        rightHeigth = 0;
+      } else {
+        rightHeigth = this.heigth(node.right.data);
+      }
+
+      if (Math.abs(leftHeigth - rightHeigth) > 1) {
+        balanced = false;
+      }
+    });
+    return balanced;
+  }
 }
 
 export const prettyPrint = (node, prefix = "", isLeft = true) => {
