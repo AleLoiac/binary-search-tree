@@ -71,6 +71,55 @@ export class Tree {
       parent.right = newNode;
     }
   }
+
+  deleteItem(value) {
+    let currNode = this.root;
+    let parent = null;
+
+    while (currNode !== null && currNode.data !== value) {
+      parent = currNode;
+
+      if (currNode.data > value) {
+        currNode = currNode.left;
+      } else if (currNode.data < value) {
+        currNode = currNode.right;
+      }
+    }
+
+    if (!currNode) {
+      return;
+    }
+
+    if (!currNode.right && !currNode.left) {
+      if (parent.data > value) {
+        parent.left = null;
+      } else {
+        parent.right = null;
+      }
+    } else if (!currNode.right || !currNode.left) {
+      if (parent.data > value) {
+        parent.left = currNode.left;
+      } else {
+        parent.right = currNode.right;
+      }
+    } else {
+      let temp = currNode.right;
+      let p = null;
+
+      while (temp.left !== null) {
+        p = temp;
+        temp = temp.left;
+      }
+
+      if (p !== null) {
+        p.left = temp.right;
+      } else {
+        currNode.right = temp.right;
+      }
+
+      currNode.data = temp.data;
+    }
+  }
 }
 
 export const prettyPrint = (node, prefix = "", isLeft = true) => {
