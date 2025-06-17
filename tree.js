@@ -4,6 +4,31 @@ export class Tree {
   constructor(array) {
     this.root = buildTree(array);
   }
+
+  insert(value) {
+    let currNode = this.root;
+    let parent = null;
+
+    while (currNode !== null) {
+      parent = currNode;
+
+      if (currNode.data > value) {
+        currNode = currNode.left;
+      } else if (currNode.data < value) {
+        currNode = currNode.right;
+      } else {
+        return;
+      }
+    }
+
+    const newNode = new Node(value);
+
+    if (parent.data > value) {
+      parent.left = newNode;
+    } else {
+      parent.right = newNode;
+    }
+  }
 }
 
 function buildTree(array) {
