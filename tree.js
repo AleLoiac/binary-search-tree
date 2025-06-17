@@ -203,6 +203,26 @@ export class Tree {
     }
     recurse(queue);
   }
+
+  preOrder(callback) {
+    if (typeof callback !== "function") {
+      throw new Error("Parameter is not a function!");
+    }
+
+    function recurse(root) {
+      if (root === null) {
+        return;
+      }
+      callback(root);
+      if (root.left !== null) {
+        recurse(root.left);
+      }
+      if (root.right !== null) {
+        recurse(root.right);
+      }
+    }
+    recurse(this.root);
+  }
 }
 
 export const prettyPrint = (node, prefix = "", isLeft = true) => {
