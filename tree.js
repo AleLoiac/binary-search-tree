@@ -174,6 +174,35 @@ export class Tree {
       queue.shift();
     }
   }
+
+  levelOrderRecursive(callback) {
+    if (typeof callback !== "function") {
+      throw new Error("Parameter is not a function!");
+    }
+
+    if (!this.root) {
+      return;
+    }
+
+    const queue = [this.root];
+
+    function recurse(queue) {
+      if (queue.length === 0) {
+        return;
+      }
+
+      const node = queue.shift();
+      callback(node);
+      if (node.left !== null) {
+        queue.push(node.left);
+      }
+      if (node.right !== null) {
+        queue.push(node.right);
+      }
+      recurse(queue);
+    }
+    recurse(queue);
+  }
 }
 
 export const prettyPrint = (node, prefix = "", isLeft = true) => {
