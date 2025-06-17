@@ -263,6 +263,24 @@ export class Tree {
     }
     recurse(this.root);
   }
+
+  heigth(value) {
+    const startingNode = this.find(value);
+
+    if (!startingNode) {
+      return -1;
+    }
+
+    function recurse(node) {
+      if (!node) {
+        return 0;
+      }
+
+      return Math.max(recurse(node.left), recurse(node.right)) + 1;
+    }
+
+    return recurse(startingNode);
+  }
 }
 
 export const prettyPrint = (node, prefix = "", isLeft = true) => {
